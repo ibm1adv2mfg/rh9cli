@@ -1,8 +1,35 @@
-FROM registry.access.redhat.com/ubi9/ubi
+## Using S2I PHP 8.0 version supported by Cirrus as a safe copy
+FROM registry.cirrus.ibm.com/ubi8/php-80:latest
 
-USER 0
-#USER 1001
 
-WORKDIR /app
+## File Author / Maintainer
+LABEL org.opencontainers.image.authors=""
 
-CMD ["/bin/bash"]
+
+## Environment variables
+ENV PHP_CONTAINER_SCRIPTS_PATH /usr/share/container-scripts/php/
+ENV HTTPD_CONFIGURATION_PATH /opt/app-root/etc/conf.d
+
+## For dnf, must be run as root
+USER root
+RUN dnf update -y && dnf upgrade -y
+RUN dnf install nano iputils net-tools -y
+RUN mkdir -p /tmp/src
+RUN chmod -R 777 /tmp/src
+RUN chmod -R 777 /opt/app-root
+
+
+## Copy content from GitHub directory to pre-defined HTTPD directory 
+COPY . /opt/app-root/src/
+RUN chmod -R 777 /opt/app-root
+
+
+## installation additional packages
+RUN dnf install php-pear php-devel -y
+RUN pecl channel-update pecl.php.net
+
+
+## Preparation to run HTTPD and expose network port
+RUN chmod -R 777 /run/httpd 
+CMD /usr/libexec/s2i/run
+EXPOSE 8080
