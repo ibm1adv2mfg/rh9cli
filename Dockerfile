@@ -1,5 +1,5 @@
 ## Using S2I PHP 8.0 version supported by Cirrus as a safe copy
-FROM registry.cirrus.ibm.com/ubi8/php-80:latest
+FROM registry.redhat.io/rhel8/php-80:latest
 
 
 ## File Author / Maintainer
