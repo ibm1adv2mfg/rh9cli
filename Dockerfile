@@ -1,5 +1,5 @@
 # Redhat
-FROM registry.redhat.io/rhel9/php-80:latest
+FROM registry.redhat.io/rhel9/php-81:latest
 
 ## File Author / Maintainer
 LABEL org.opencontainers.image.authors=""
