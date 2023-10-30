@@ -1,6 +1,5 @@
-## Using S2I PHP 8.0 version supported by Cirrus as a safe copy
+# Redhat
 FROM registry.redhat.io/rhel8/php-80:latest
-
 
 ## File Author / Maintainer
 LABEL org.opencontainers.image.authors=""
@@ -20,8 +19,8 @@ RUN chmod -R 777 /opt/app-root
 
 
 ## Copy content from GitHub directory to pre-defined HTTPD directory 
-COPY . /opt/app-root/src/
-RUN chmod -R 777 /opt/app-root
+#COPY . /opt/app-root/src/
+#RUN chmod -R 777 /opt/app-root
 
 
 ## installation additional packages
@@ -30,6 +29,6 @@ RUN pecl channel-update pecl.php.net
 
 
 ## Preparation to run HTTPD and expose network port
-RUN chmod -R 777 /run/httpd 
+#RUN chmod -R 777 /run/httpd 
 CMD /usr/libexec/s2i/run
 EXPOSE 8080
