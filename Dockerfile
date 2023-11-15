@@ -2,7 +2,7 @@
 FROM registry.redhat.io/rhel9/php-81:latest
 
 ## File Author / Maintainer
-LABEL org.opencontainers.image.authors=""
+LABEL org.opencontainers.image.authors="pohtsp@sg.ibm.com"
 
 
 ## Environment variables
